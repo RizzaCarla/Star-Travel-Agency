@@ -1,52 +1,74 @@
 import React, { useState } from 'react';
 
 const CustomItinerary = () => {
-  const [location, setLocation] = useState('');
-  const [budget, setBudget] = useState('');
-  const [contact, setContact] = useState('');
+  const [form, setForm] = useState({
+    location: '',
+    budget: '',
+    contact: ''
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert(`Itinerary submitted for ${location} with a budget of ${budget}. Contact: ${contact}`);
+    alert(
+      `Itinerary submitted for ${form.location} with a budget of ${form.budget}. Contact: ${form.contact}`
+    );
+
+    setForm({
+      location: '',
+      budget: '',
+      contact: ''
+    });
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
+    <section id="itinerary" className="section">
+      <h2>Create a Custom Itinerary</h2>
+
+      <form className="itinerary-form" onSubmit={handleSubmit}>
         <label>
-          Dream Travel Location:
+          Dream Travel Location
           <input
             type="text"
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
+            name="location"
+            value={form.location}
+            onChange={handleChange}
+            placeholder="e.g. Bali, Japan, Paris"
             required
           />
         </label>
-      </div>
-      <div>
+
         <label>
-          Budget:
+          Budget
           <input
-            type="number"
-            value={budget}
-            onChange={(e) => setBudget(e.target.value)}
+            type="text"
+            name="budget"
+            value={form.budget}
+            onChange={handleChange}
+            placeholder="e.g. $2500"
             required
           />
         </label>
-      </div>
-      <div>
+
         <label>
-          Contact Information:
+          Contact Information
           <input
-            type="email"
-            value={contact}
-            onChange={(e) => setContact(e.target.value)}
+            type="text"
+            name="contact"
+            value={form.contact}
+            onChange={handleChange}
+            placeholder="Email or phone number"
             required
           />
         </label>
-      </div>
-      <button type="submit">Submit Itinerary</button>
-    </form>
+
+        <button type="submit" className="btn">Submit Itinerary</button>
+      </form>
+    </section>
   );
 };
 
