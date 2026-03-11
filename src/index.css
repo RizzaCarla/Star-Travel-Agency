@@ -1,4 +1,40 @@
-* {
+/* =========================
+   1. Design Tokens
+========================= */
+:root {
+  --primary: #f46a84;
+  --primary-dark: #c9435b;
+
+  --accent-yellow: #f0f29c;
+
+  --green-light: #a7d7a8;
+  --green-soft: #c4e3c4;
+  --green-mint: #9ee0a0;
+
+  --text-dark: #1f2937;
+  --text-muted: #475569;
+
+  --background: #f8fafc;
+  --surface: #ffffff;
+  --border-light: #cbd5e1;
+  --tag-bg: #e0f2fe;
+  --tag-text: #0369a1;
+
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --shadow-sm: 0 8px 24px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 10px 25px rgba(0, 0, 0, 0.08);
+
+  --max-width: 1100px;
+  --transition-fast: 0.2s ease;
+}
+
+/* =========================
+   2. Reset / Base
+========================= */
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
@@ -9,15 +45,525 @@ html {
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: #f7f9fc;
-  color: #1f2937;
+  line-height: 1.5;
+  color: var(--text-dark);
+  background: var(--background);
+}
+
+h1,
+h2,
+h3,
+p,
+ul {
+  margin: 0;
 }
 
 a {
-  text-decoration: none;
   color: inherit;
+  text-decoration: none;
 }
 
-ul {
-  padding-left: 1.25rem;
+img {
+  display: block;
+  max-width: 100%;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+/* =========================
+   3. Shared Utility Styles
+========================= */
+.page,
+.intro-section,
+.contact-section {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 60px 20px;
+}
+
+.page-header {
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.page-header h1,
+.intro-section h2,
+.contact-section h2 {
+  margin-bottom: 16px;
+}
+
+.page-header p,
+.intro-section p,
+.contact-section p {
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+/* =========================
+   4. Navbar
+========================= */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+
+  padding: 20px 40px;
+  background: var(--green-soft);
+  color: var(--text-dark);
+}
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  font-size: 1.4rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.nav-links {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links a {
+  font-weight: 600;
+  transition: color var(--transition-fast);
+}
+
+.nav-links a:hover {
+  color: var(--primary-dark);
+}
+
+/* =========================
+   5. Star Animation
+========================= */
+.star {
+  display: inline-block;
+  margin-right: 8px;
+  color: var(--primary);
+  font-size: 1.2em;
+}
+
+.spin {
+  animation: rotateStar 0.6s ease;
+}
+
+@keyframes rotateStar {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* =========================
+   6. Hero
+========================= */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 60px 20px;
+  text-align: center;
+
+  background: linear-gradient(
+    135deg,
+    var(--green-light),
+    var(--green-mint),
+    var(--accent-yellow)
+  );
+
+  color: var(--text-dark);
+}
+
+.hero-content {
+  max-width: 800px;
+}
+
+.hero h1 {
+  margin-bottom: 20px;
+  font-size: 3rem;
+}
+
+.hero p {
+  margin-bottom: 30px;
+  font-size: 1.1rem;
+  line-height: 1.7;
+}
+
+.hero-buttons,
+.contact-buttons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+/* =========================
+   7. Buttons
+========================= */
+.btn {
+  display: inline-block;
+  padding: 14px 22px;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+  transition: transform var(--transition-fast),
+    background var(--transition-fast),
+    color var(--transition-fast),
+    border-color var(--transition-fast);
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: var(--surface);
+}
+
+.btn-primary:hover {
+  background: var(--primary-dark);
+}
+
+.btn-secondary {
+  background: var(--surface);
+  color: var(--text-dark);
+  border: 1px solid var(--border-light);
+}
+
+/* =========================
+   8. Section Backgrounds
+========================= */
+.intro-section {
+  background: var(--green-soft);
+}
+
+.contact-section {
+  background: var(--accent-yellow);
+}
+
+/* =========================
+   9. Itineraries / Cards
+========================= */
+.continent-section {
+  margin-bottom: 50px;
+}
+
+.continent-section h2 {
+  margin-bottom: 20px;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  padding: 24px;
+  background: var(--surface);
+  border: 2px solid var(--green-soft);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
+
+.itinerary-card h3 {
+  margin-bottom: 12px;
+}
+
+.itinerary-card p {
+  margin-bottom: 16px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.tag {
+  display: inline-block;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: var(--tag-bg);
+  color: var(--tag-text);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+/* =========================
+   10. Custom Itinerary Box
+========================= */
+.custom-box {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 32px;
+  background: var(--surface);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
+
+.custom-box h2 {
+  margin-bottom: 16px;
+}
+
+.custom-box ul {
+  margin: 20px 0 30px 20px;
+  line-height: 1.8;
+}
+
+/* =========================
+   11. Contact Page
+========================= */
+.contact-page {
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.contact-box {
+  max-width: 500px;
+  padding: 40px;
+  text-align: center;
+  background: var(--surface);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+}
+
+.contact-box h1 {
+  margin-bottom: 10px;
+}
+
+.contact-box p {
+  margin-bottom: 30px;
+  color: var(--text-muted);
+}
+
+.contact-buttons {
+  flex-direction: row;
+  margin: 20px 0px;
+}
+
+.contact-btn {
+  display: inline-block;
+  padding: 14px 20px;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  transition: transform 0.15s ease;
+}
+
+.contact-btn:hover {
+  transform: translateY(-2px);
+}
+
+.call {
+  background: var(--green-mint);
+  color: var(--text-dark);
+}
+
+.email {
+  background: var(--primary);
+  color: var(--surface);
+}
+
+/* =========================
+   12. Responsive
+========================= */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  .nav-links {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .hero h1 {
+    font-size: 2.2rem;
+  }
+}
+
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding: 20px 40px;
+  background: var(--green-soft);
+  color: var(--text-dark);
+}
+
+.navbar-home {
+  justify-content: center;
+}
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  font-size: 1.4rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.nav-links {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links a {
+  font-weight: 600;
+  transition: color var(--transition-fast);
+}
+
+.nav-links a:hover {
+  color: var(--primary-dark);
+}
+
+/* center navbar on home */
+.navbar-home {
+  justify-content: center;
+}
+
+/* normal logo */
+.logo {
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+/* large homepage logo */
+.logo-home {
+  font-size: 3rem;
+}
+
+.itinerary-link {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.itinerary-link:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.12);
+}
+
+.trip-price {
+  margin-top: 14px;
+  font-weight: 700;
+  color: var(--primary-dark);
+}
+
+.trip-details-page {
+  padding-top: 40px;
+  padding-bottom: 60px;
+}
+
+.trip-hero {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 32px;
+  align-items: center;
+  margin-bottom: 48px;
+}
+
+.trip-image {
+  width: 100%;
+  height: 420px;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
+
+.trip-summary h1 {
+  margin-bottom: 12px;
+  font-size: 2.5rem;
+}
+
+.trip-location {
+  margin-bottom: 10px;
+  font-weight: 700;
+  color: var(--primary-dark);
+}
+
+.trip-description {
+  margin-bottom: 20px;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+.trip-meta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+.trip-price-large {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--text-dark);
+}
+
+.trip-section {
+  margin-bottom: 40px;
+}
+
+.trip-section h2 {
+  margin-bottom: 18px;
+}
+
+.trip-list {
+  padding-left: 20px;
+  line-height: 1.8;
+}
+
+.schedule-list {
+  display: grid;
+  gap: 16px;
+}
+
+.schedule-item {
+  border-left: 6px solid var(--primary);
+}
+
+.schedule-day {
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+
+.schedule-time {
+  font-weight: 700;
+  color: var(--primary-dark);
+  margin-bottom: 8px;
+}
+
+@media (max-width: 900px) {
+  .trip-hero {
+    grid-template-columns: 1fr;
+  }
+
+  .trip-image {
+    height: 280px;
+  }
+
+  .trip-summary h1 {
+    font-size: 2rem;
+  }
 }
